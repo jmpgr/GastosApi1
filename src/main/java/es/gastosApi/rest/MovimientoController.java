@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RepositoryRestController
-@RequestMapping("/movimientos/search")
+@RequestMapping(path = "/movimientos/search")
 public class MovimientoController {
 
     MovimientoDAO movimientoDAO;
@@ -21,7 +21,7 @@ public class MovimientoController {
         this.movimientoDAO = movimientoDAO;
     }
 
-    @GetMapping(value ="/por-categoria")
+    @GetMapping("/por-categoria")
     @ResponseBody
     public CollectionModel<PersistentEntityResource> getMovimientosPorCategoria(@RequestParam String categoria, @RequestParam String iban,PersistentEntityResourceAssembler assembler){
         final List<MovimientoConId> movimientosPorCategorias = movimientoDAO.getMovimientosPorCategorias(categoria, iban);

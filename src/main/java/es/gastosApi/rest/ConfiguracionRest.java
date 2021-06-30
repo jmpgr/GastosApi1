@@ -1,6 +1,8 @@
 package es.gastosApi.rest;
 
 import es.gastosApi.entidades.CuentaConId;
+import es.gastosApi.entidades.MovimientoConId;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
@@ -52,10 +54,11 @@ public class ConfiguracionRest {
     RepresentationModelProcessor<RepositorySearchesResource> addSearchLinks(RepositoryRestConfiguration config) {
         Map<Class<?>, Class<?>> controllersRegistrados = new HashMap<>();
         controllersRegistrados.put(CuentaConId.class, CuentaController.class);
+        controllersRegistrados.put(MovimientoConId.class, MovimientoController.class);
 
 
         return new RepresentationModelProcessor<RepositorySearchesResource>() {
-
+        	@SuppressWarnings("deprecation")
             @Override
             public RepositorySearchesResource process(RepositorySearchesResource searchResource) {
                 if (controllersRegistrados.containsKey(searchResource.getDomainType())) {

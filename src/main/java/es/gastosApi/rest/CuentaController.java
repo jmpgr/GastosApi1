@@ -6,10 +6,11 @@ import org.springframework.data.rest.webmvc.RepositoryRestController;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @RepositoryRestController
-@RequestMapping("/cuentas/search")
+@RequestMapping(path = "/cuentas/search")
 public class CuentaController {
 
     CuentaDAO cuentaDAO;
@@ -18,10 +19,10 @@ public class CuentaController {
         this.cuentaDAO = cuentaDAO;
     }
 
-    @GetMapping(value = "/total")
+    @GetMapping("/total")
     @ResponseBody
-    public EntityModel<Object> getTotalnCuenta(PersistentEntityResourceAssembler assembler) {
-        double total = cuentaDAO.totalEnCuenta(1);
-        return assembler.toModel(total);
+    public double getTotalEnCuenta(@RequestParam Long idCuenta, PersistentEntityResourceAssembler assembler) {
+        double total = cuentaDAO.totalEnCuenta(idCuenta);
+        return total;
     }
 }
